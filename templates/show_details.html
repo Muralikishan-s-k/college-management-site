@@ -1,0 +1,67 @@
+{% extends 'navbar1.html' %}
+
+{% block content%}
+    <style>
+        body {
+            padding: 20px;
+            background-color: #d7ef61; /* Set your desired background color */
+        }
+        .container {
+            background-color: #ffffff; /* Set background color for the content container */
+            border-radius: 8px; /* Add some border radius for a rounded appearance */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+            padding: 20px;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .action-links a {
+            margin-right: 10px;
+        }
+    </style>
+    <div class="container">
+        <h2 class="text-center">Student Information</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>STUDENT NAME</th>
+                        <th>EMAIL ADDRESS</th>
+                        <th>AGE</th>
+                        <th>JOINING DATE</th>
+                        <th>COURSE</th>
+                        <th>COURSE FEE</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in students %}
+                        <tr>
+                            <td>{{s.student_name}}</td>
+                            <td>{{s.student_address}}</td>
+                            <td>{{s.student_age}}</td>
+                            <td>{{s.joining_date}}</td>
+                            <td>{{s.course.course_name}}</td>
+                            <td>{{s.course.fee}}</td>
+                            <td class="action-links">
+                                <a href="{% url 'edit' s.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{% url 'delete' s.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

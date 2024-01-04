@@ -1,0 +1,82 @@
+{% extends 'navbar1.html' %}
+
+{% block content %}
+<style>
+    body {
+        padding: 20px;
+        background-color: #52c0d6; /* Set your desired background color */
+    }
+    .container {
+        background-color: #ffffff; /* Set background color for the content container */
+        border-radius: 8px; /* Add some border radius for a rounded appearance */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+        padding: 20px;
+        margin-top: 20px;
+    }
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .action-links a {
+        margin-right: 10px;
+    }
+    .responsive-image {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<div class="container">
+    <h2 class="text-center">Teacher Information</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>FIRST NAME</th>
+                    <th>LAST NAME</th>
+                    <th>USERNAME</th>
+                    <th>EMAIL</th>
+                    <th>ADDRESS</th>
+                    <th>AGE</th>
+                    <th>CONTACT NUMBER</th>
+                    <th>COURSE</th>
+                    <th>IMAGE</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in user %}
+                    <tr>
+                        <td>{{s.user.first_name}}</td>
+                        <td>{{s.user.last_name}}</td>
+                        <td>{{s.user.username}}</td>
+                        <td>{{s.user.email}}</td>
+                        <td>{{s.address}}</td>
+                        <td>{{s.age}}</td>
+                        <td>{{s.number}}</td>
+                        <td>{{s.course.course_name}}</td>
+                        <td>
+                            {% if s.image %}
+                                <img src="{{s.image.url}}" alt="" class="responsive-image">
+                            {% else %}
+                                No Image Available
+                            {% endif %}
+                        </td>
+                        <td class="action-links">
+                            <a href="{% url 'delete1' s.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'navbar2.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    .col-md-4 {
+        text-align: center;
+    }
+
+    .alert {
+        margin-bottom: 15px;
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 20px;
+    }
+
+    .image-container div {
+        text-align: center;
+    }
+
+    .image-container img {
+        border-radius: 10px;
+        margin-bottom: 10px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .image-container p {
+        font-size: 16px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .image-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-container div {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="col-md-4">
+            {% for msg in messages %}
+                <div class="alert alert-danger mt-3">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="image-container">
+            <div>
+                <a href="{% url 'edit_teacher' user.id %}">
+                    <img src="{% static 'images/editprofile.png' %}" alt="Edit Profile">
+                </a>
+                <p>Edit Profile</p>
+            </div>
+            <div>
+                <a href="{% url 'showprofile' user.id %}">
+                    <img src="{% static 'images/showprofile.png' %}" alt="Show Profile">
+                </a>
+                <p>Show Profile</p>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

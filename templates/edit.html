@@ -1,0 +1,87 @@
+{% extends 'navbar1.html' %}
+
+{% block content %}
+    <style>
+        body {
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #studentForm {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            #studentForm {
+                max-width: 100%;
+            }
+        }
+    </style>
+    
+    <form action="{% url 'editdb' stud.id %}" method="post" id="studentForm">
+        {% csrf_token %}
+        <h1>Edit Details:</h1>
+        <div class="form-group">
+            <input type="text" class="form-control" name="name" id="studentname" required value="{{stud.student_name}}" placeholder="Student Name">
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" name="address" id="address" required value="{{stud.student_address}}" placeholder="Student Address">
+        </div>
+
+        <div class="form-group">
+            <input type="number" class="form-control" name="age" id="age" required value="{{stud.student_age}}" placeholder="Student Age">
+        </div>
+
+        <div class="form-group">
+            <input type="date" class="form-control" name="jdate" id="joiningdate" required value="{{ stud.joining_date|date:'Y-m-d' }}" placeholder="Joining Date">
+        </div>
+
+        <div class="form-group">
+            <select class="form-control" name="sel" id="qualification" required>
+                {% for c in course %}
+                    {% if c.id == stud.course.id %}
+                        <option value="{{c.id}}" selected>{{c.course_name}}</option>
+                    {% else %} 
+                        <option value="{{c.id}}" >{{c.course_name}}</option> 
+                    {% endif %}      
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'navbar2.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        background-color: #b181f3;
+        font-family: 'Arial', sans-serif;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    input,
+    select,
+    button {
+        margin-bottom: 15px;
+    }
+
+    img {
+        display: block;
+        margin: 10px 0;
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <form enctype="multipart/form-data" action="{% url 'editteacher' user.id %}" method="post" id="studentForm"
+        class="mt-5">
+        {% csrf_token %}
+        <h1 style="font-weight: bold;font-family: Georgia, 'Times New Roman', Times, serif;">Edit Profile:</h1>
+        <div class="form-group">
+            <input type="text" name="first_name" class="form-control" placeholder="First Name"
+                value="{{user.user.first_name}}">
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="last_name" class="form-control" placeholder="Last Name"
+                value="{{user.user.last_name}}">
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="username" class="form-control" placeholder="Username"
+                value="{{user.user.username}}">
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="address" class="form-control" placeholder="Address" value="{{user.address}}">
+        </div>
+
+        <div class="form-group">
+            <input type="number" name="age" class="form-control" placeholder="Age" value="{{user.age}}">
+        </div>
+
+        <div class="form-group">
+            <input type="email" name="email" class="form-control" placeholder="Email Address"
+                value="{{user.user.email}}">
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="number" class="form-control" placeholder="Contact Number" value="{{user.number}}">
+        </div>
+
+        <div class="form-group">
+            <img src="{{user.image.url}}" alt="Profile Image" width="150px" height="150px" class="img-fluid rounded">
+        </div>
+
+        <div class="form-group">
+            <input type="file" name="file" class="form-control" accept="image/*">
+        </div>
+
+        <div class="form-group">
+            <label for="qualification">Qualification:</label>
+            <select class="form-control" name="sel" id="qualification">
+                {% for c in c %}
+                {% if c.id == user.course.id %}
+                <option value="{{c.id}}" selected>{{c.course_name}}</option>
+                {% else %}
+                <option value="{{c.id}}">{{c.course_name}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+</body>
+
+{% endblock %}

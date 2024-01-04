@@ -1,0 +1,82 @@
+{% extends 'navbar2.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #ea81a0;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-footer {
+        text-align: center;
+        padding: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .btn-warning {
+        color: #fff;
+        background-color: #ffc107;
+        border-color: #ffc107;
+    }
+
+    img {
+        display: block;
+        margin: 10px auto;
+        max-width: 100%;
+        width: 250px; /* Change to desired width */
+        height: 150px;
+        border-radius: 5px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                MY PROFILE
+            </div>
+
+            <div class="card-body">
+                <p><strong>Image Name:</strong> {{user.image}}<br>
+                    <img src="{{user.image.url}}" alt="" class="img-fluid rounded"></p>
+                <p><strong>Name:</strong> {{user.user.first_name}}</p>
+                <p><strong>Email:</strong> {{user.user.email}}</p>
+                <p><strong>Address:</strong> {{user.address}}</p>
+                <p><strong>Age:</strong> {{user.age}}</p>
+                <p><strong>Mobile Number:</strong> {{user.number}}</p>
+                <p><strong>Course:</strong> {{user.course.course_name}}</p>
+            </div>
+
+            <div class="card-footer">
+                <a href="{% url 'goback' %}" class="btn btn-warning">GO BACK</a>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
